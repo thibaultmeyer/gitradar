@@ -1,0 +1,12 @@
+language: java
+
+jdk:
+    - openjdk8
+
+install:
+    - mvn clean
+    - mvn compile
+    - mvn process-test-classes
+
+script:
+    - mvn test

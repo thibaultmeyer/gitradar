@@ -6,7 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -27,11 +27,17 @@ public class GitRepoModel {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(targetEntity = IgnoredCommitModel.class, mappedBy = "gitRepoModel")
-    private List<IgnoredCommitModel> ignoredCommitModelList;
+    @Column(name = "upstream")
+    private String upstream;
 
-    @OneToMany(targetEntity = ScanModel.class, mappedBy = "gitRepoModel")
-    private List<ScanModel> scanModelList;
+    @Column(name = "clone_url")
+    private String cloneUrl;
+
+    @OneToMany(targetEntity = IgnoredCommitModel.class, mappedBy = "gitRepo", orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<IgnoredCommitModel> ignoredCommitList;
+
+    @OneToMany(targetEntity = ScanModel.class, mappedBy = "gitRepo", orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<ScanModel> scanList;
 
     @DateCreated
     @Column(name = "created_at")
@@ -66,12 +72,36 @@ public class GitRepoModel {
         this.name = name;
     }
 
-    public List<IgnoredCommitModel> getIgnoredCommitModelList() {
-        return ignoredCommitModelList;
+    public String getUpstream() {
+        return upstream;
     }
 
-    public void setIgnoredCommitModelList(final List<IgnoredCommitModel> ignoredCommitModelList) {
-        this.ignoredCommitModelList = ignoredCommitModelList;
+    public void setUpstream(final String upstream) {
+        this.upstream = upstream;
+    }
+
+    public String getCloneUrl() {
+        return cloneUrl;
+    }
+
+    public void setCloneUrl(final String cloneUrl) {
+        this.cloneUrl = cloneUrl;
+    }
+
+    public Set<IgnoredCommitModel> getIgnoredCommitList() {
+        return ignoredCommitList;
+    }
+
+    public void setIgnoredCommitList(final Set<IgnoredCommitModel> ignoredCommitList) {
+        this.ignoredCommitList = ignoredCommitList;
+    }
+
+    public Set<ScanModel> getScanList() {
+        return scanList;
+    }
+
+    public void setScanList(final Set<ScanModel> scanList) {
+        this.scanList = scanList;
     }
 
     public LocalDateTime getCreatedAt() {

@@ -14,6 +14,10 @@ public final class GitRepo {
 
     private String name;
 
+    private String upstream;
+
+    private String cloneUrl;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -21,13 +25,19 @@ public final class GitRepo {
     /**
      * Build a new instance.
      *
-     * @param slug The URL slug
-     * @param name The name of the repository
+     * @param slug     The URL slug
+     * @param name     The name of the Git repository
+     * @param upstream The upstream branch name
+     * @param cloneUrl The URL to use to clone Git repository
      */
     public GitRepo(final String slug,
-                   final String name) {
+                   final String name,
+                   final String upstream,
+                   final String cloneUrl) {
         this.slug = slug;
         this.name = name;
+        this.upstream = upstream;
+        this.cloneUrl = cloneUrl;
     }
 
     /**
@@ -42,11 +52,15 @@ public final class GitRepo {
     public GitRepo(final UUID id,
                    final String slug,
                    final String name,
+                   final String upstream,
+                   final String cloneUrl,
                    final LocalDateTime createdAt,
                    final LocalDateTime updatedAt) {
         this.id = id;
         this.slug = slug;
         this.name = name;
+        this.upstream = upstream;
+        this.cloneUrl = cloneUrl;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -73,6 +87,22 @@ public final class GitRepo {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    public String getUpstream() {
+        return upstream;
+    }
+
+    public void setUpstream(final String upstream) {
+        this.upstream = upstream;
+    }
+
+    public String getCloneUrl() {
+        return cloneUrl;
+    }
+
+    public void setCloneUrl(final String cloneUrl) {
+        this.cloneUrl = cloneUrl;
     }
 
     public LocalDateTime getCreatedAt() {

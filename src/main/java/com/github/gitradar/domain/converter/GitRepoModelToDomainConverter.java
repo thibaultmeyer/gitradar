@@ -29,6 +29,8 @@ public final class GitRepoModelToDomainConverter implements TypeConverter<GitRep
             gitRepoModel.getId(),
             gitRepoModel.getSlug(),
             gitRepoModel.getName(),
+            gitRepoModel.getUpstream(),
+            gitRepoModel.getCloneUrl(),
             gitRepoModel.getCreatedAt(),
             gitRepoModel.getUpdatedAt()
         );

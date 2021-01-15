@@ -30,14 +30,13 @@ public final class UserService {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     private final ConversionService<?> conversionService;
-
     private final UserRepository userRepository;
 
     /**
      * Build a new instance.
      *
-     * @param conversionService handle to the conversion service
-     * @param userRepository    handle to the user repository
+     * @param conversionService Handle to the conversion service
+     * @param userRepository    Handle to the user repository
      */
     @Inject
     public UserService(final ConversionService<?> conversionService,

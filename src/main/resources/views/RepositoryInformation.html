@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html th:with="lang=${#locale.language}" th:lang="${lang}">
+<head th:replace="fragments/head.html :: head(${repositoryName})"></head>
+
+<body>
+<div class="ui container">
+    <div th:replace="fragments/menubar.html :: menubar()"></div>
+
+    <h2 th:text="${repositoryName}"></h2>
+    <br/>
+
+</div> <!-- End container -->
+
+</body>
+</html>

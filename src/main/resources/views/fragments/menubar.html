@@ -1,0 +1,20 @@
+<div class="ui inverted menu" style="margin-top:15px" th:fragment="menubar()">
+    <a class="item" th:href="@{~/}">
+        Home
+    </a>
+    <a class="item">
+        Add new repository
+    </a>
+    <a class="item">
+        System
+    </a>
+    <div class="right menu">
+        <div class="ui category search item">
+            <div class="ui transparent icon input">
+                <input class="prompt" type="text" style="color: white;" th:placeholder="#{menubar.search}">
+                <i class="search link icon" style="color: white;"></i>
+            </div>
+            <div class="results"></div>
+        </div>
+    </div>
+</div>

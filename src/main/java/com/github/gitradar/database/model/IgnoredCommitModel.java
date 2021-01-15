@@ -1,6 +1,7 @@
 package com.github.gitradar.database.model;
 
 import io.micronaut.data.annotation.DateCreated;
+import io.micronaut.data.annotation.DateUpdated;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -27,13 +28,14 @@ public final class IgnoredCommitModel {
 
     @ManyToOne
     @JoinColumn(name = "git_repo_id", nullable = false)
-    private GitRepoModel gitRepoModel;
+    private GitRepoModel gitRepo;
 
     @DateCreated
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @DateCreated
+    @DateUpdated
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
@@ -59,6 +61,14 @@ public final class IgnoredCommitModel {
 
     public void setReason(final String reason) {
         this.reason = reason;
+    }
+
+    public GitRepoModel getGitRepo() {
+        return gitRepo;
+    }
+
+    public void setGitRepo(final GitRepoModel gitRepo) {
+        this.gitRepo = gitRepo;
     }
 
     public LocalDateTime getCreatedAt() {

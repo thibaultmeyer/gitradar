@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html th:with="lang=${#locale.language}" th:lang="${lang}">
+<head th:replace="fragments/head.html :: head(#{title.repositories})"></head>
+
+<body>
+<div class="ui container">
+    <div th:replace="fragments/menubar.html :: menubar()"></div>
+
+    <h2 th:text="#{title.repositories}"></h2>
+    <br/>
+
+    <div class="ui relaxed divided list" th:if="${!repositoryList.isEmpty}">
+        <th:block th:each="repo : ${repositoryList}">
+            <div class="item">
+
+                    <div class="ui grid">
+                        <div class="one wide column" style="max-width: 15px">
+                            <i class="exclamation check circle icon green"
+                               th:if="${repo.lastScanUnmergedCommit == 0 && repo.lastScanStatus != null && repo.lastScanStatus != 'ABORTED'}"></i>
+                            <i class="exclamation triangle icon orange"
+                               th:if="${repo.lastScanUnmergedCommit > 0 && repo.lastScanStatus != 'ABORTED'}"></i>
+                            <i class="exclamation check circle icon red"
+                               th:if="${repo.lastScanStatus == 'ABORTED'}"></i>
+                            <i class="sync circle icon disabled"
+                               th:if="${repo.lastScanStatus == 'IN_PROGRESS'}"></i>
+                            <i class="hourglass outline icon disabled"
+                               th:if="${repo.lastScanStatus == null}"></i>
+                        </div>
+                        <div class="eight wide column">
+                            <a class="header" th:text="${repo.name}" th:href="@{/repository/{gitRepoSlug}(gitRepoSlug=${repo.slug})}"></a>
+                        </div>
+                        <div class="one wide column"></div>
+                        <div class="six wide column">
+                            <div class="description" style="text-align: right">
+                                <th:block th:switch="${repo.lastScanStatus}">
+                                    <div th:case="'COMPLETE'">
+                                        <span th:text="${repo.lastScan}"></span>
+                                    </div>
+                                    <div th:case="'IN_PROGRESS'">
+                                        <span th:text="#{home.scan.in.progress}"></span>
+                                    </div>
+                                    <div th:case="*">
+                                        <span th:text="#{home.scan.not.yet.scanned}"></span>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+        </th:block>
+    </div>
+
+    <div class="ui placeholder segment" th:if="${repositoryList.isEmpty}">
+        <div class="ui icon header">
+            <i class="search icon"></i>
+            We don't have any documents matching your query
+        </div>
+        <div class="inline">
+            <div class="ui primary button">Clear Query</div>
+            <div class="ui button">Add Document</div>
+        </div>
+    </div>
+
+</div> <!-- End container -->
+
+</body>
+</html>

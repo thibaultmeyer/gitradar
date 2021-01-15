@@ -6,8 +6,6 @@ import io.micronaut.core.convert.ConversionContext;
 import io.micronaut.core.convert.TypeConverter;
 
 import javax.inject.Singleton;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Optional;
 
 /**
@@ -31,8 +29,10 @@ public final class GitRepoDomainlToModelConverter implements TypeConverter<GitRe
         gitRepoModel.setId(gitRepo.getId());
         gitRepoModel.setSlug(gitRepo.getSlug());
         gitRepoModel.setName(gitRepo.getName());
-        gitRepoModel.setCreatedAt(gitRepo.getCreatedAt() == null ? LocalDateTime.now(ZoneOffset.UTC) : gitRepo.getCreatedAt());
-        gitRepoModel.setUpdatedAt(LocalDateTime.now(ZoneOffset.UTC));
+        gitRepoModel.setUpstream(gitRepo.getUpstream());
+        gitRepoModel.setCloneUrl(gitRepo.getCloneUrl());
+        gitRepoModel.setCreatedAt(gitRepo.getCreatedAt());
+        gitRepoModel.setUpdatedAt(gitRepo.getUpdatedAt());
 
         return Optional.of(gitRepoModel);
     }

@@ -6,8 +6,6 @@ import io.micronaut.core.convert.ConversionContext;
 import io.micronaut.core.convert.TypeConverter;
 
 import javax.inject.Singleton;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Optional;
 
 /**
@@ -34,8 +32,8 @@ public final class UserDomainToModelConverter implements TypeConverter<User, Use
         userModel.setLastName(user.getLastName());
         userModel.setDisplayName(user.getDisplayName());
         userModel.setPassword(user.getPassword());
-        userModel.setCreatedAt(user.getCreatedAt() == null ? LocalDateTime.now(ZoneOffset.UTC) : user.getCreatedAt());
-        userModel.setUpdatedAt(LocalDateTime.now(ZoneOffset.UTC));
+        userModel.setCreatedAt(user.getCreatedAt());
+        userModel.setUpdatedAt(user.getUpdatedAt());
 
         return Optional.of(userModel);
     }

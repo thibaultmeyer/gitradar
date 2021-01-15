@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Service: Git Repository.
@@ -21,14 +22,13 @@ import java.util.stream.Collectors;
 public final class GitRepoService {
 
     private final ConversionService<?> conversionService;
-
     private final GitRepoRepository gitRepoRepository;
 
     /**
      * Build a new instance.
      *
-     * @param conversionService handle to the conversion service
-     * @param gitRepoRepository handle to the Git repository repository
+     * @param conversionService Handle to the conversion service
+     * @param gitRepoRepository Handle to the Git repository repository
      */
     @Inject
     public GitRepoService(final ConversionService<?> conversionService,
@@ -47,6 +47,17 @@ public final class GitRepoService {
             .map(gitRepoModel -> conversionService.convert(gitRepoModel, GitRepo.class).orElse(null))
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
+    }
+
+    /**
+     * Find all Git repositories.
+     *
+     * @return All Git repositories
+     */
+    public Stream<GitRepo> findAllStream() {
+        return gitRepoRepository.findAll().stream()
+            .map(gitRepoModel -> conversionService.convert(gitRepoModel, GitRepo.class).orElse(null))
+            .filter(Objects::nonNull);
     }
 
     /**
@@ -88,7 +99,7 @@ public final class GitRepoService {
     public GitRepo persist(final GitRepo gitRepo) {
         return conversionService.convert(gitRepo, GitRepoModel.class)
             .map(gitRepoModel -> gitRepoModel.getId() == null ? gitRepoRepository.save(gitRepoModel) : gitRepoRepository.update(gitRepoModel))
-            .flatMap(userModel -> conversionService.convert(userModel, GitRepo.class))
+            .flatMap(gitRepoModel -> conversionService.convert(gitRepoModel, GitRepo.class))
             .orElse(null);
     }
 }

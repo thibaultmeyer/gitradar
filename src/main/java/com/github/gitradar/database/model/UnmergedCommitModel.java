@@ -22,7 +22,7 @@ public class UnmergedCommitModel {
 
     @ManyToOne
     @JoinColumn(name = "scan_id", nullable = false)
-    private ScanModel scanModel;
+    private ScanModel scan;
 
     @Column(name = "branch_name")
     private String branch;
@@ -41,4 +41,60 @@ public class UnmergedCommitModel {
     @DateUpdated
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(final UUID id) {
+        this.id = id;
+    }
+
+    public ScanModel getScan() {
+        return scan;
+    }
+
+    public void setScan(final ScanModel scan) {
+        this.scan = scan;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(final String branch) {
+        this.branch = branch;
+    }
+
+    public String getCommitSha() {
+        return commitSha;
+    }
+
+    public void setCommitSha(final String commitSha) {
+        this.commitSha = commitSha;
+    }
+
+    public String getCommitSubject() {
+        return commitSubject;
+    }
+
+    public void setCommitSubject(final String commitSubject) {
+        this.commitSubject = commitSubject;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(final LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(final LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }

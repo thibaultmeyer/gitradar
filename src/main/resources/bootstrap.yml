@@ -3,6 +3,12 @@ micronaut:
         name: gitradar
     config-client:
         enabled: ${CONSUL_CONFIG:false}
+    router:
+        static-resources:
+            default:
+                enabled: true
+                mapping: "/static/**"
+                paths: classpath:static
     server:
         port: 8000
 

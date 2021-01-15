@@ -1,5 +1,6 @@
 package com.github.gitradar.database.model;
 
+import com.github.gitradar.domain.enumeration.ScanStatus;
 import io.micronaut.data.annotation.DateCreated;
 import io.micronaut.data.annotation.DateUpdated;
 import org.hibernate.annotations.GenericGenerator;
@@ -23,10 +24,16 @@ public final class ScanModel {
 
     @ManyToOne
     @JoinColumn(name = "git_repo_id", nullable = false)
-    private GitRepoModel gitRepoModel;
+    private GitRepoModel gitRepo;
 
-    @OneToMany(targetEntity = UnmergedCommitModel.class, mappedBy = "scanModel")
-    private List<UnmergedCommitModel> unmergedCommitModelList;
+    @Column(name = "status", nullable = false)
+    private ScanStatus status;
+
+    @Column(name = "unmerged_commit_çount", nullable = false)
+    private int unmergedCommitCount;
+
+    @OneToMany(targetEntity = UnmergedCommitModel.class, mappedBy = "scan", fetch = FetchType.LAZY)
+    private List<UnmergedCommitModel> unmergedCommitList;
 
     @DateCreated
     @Column(name = "created_at")
@@ -43,6 +50,30 @@ public final class ScanModel {
 
     public void setId(final UUID id) {
         this.id = id;
+    }
+
+    public GitRepoModel getGitRepo() {
+        return gitRepo;
+    }
+
+    public void setGitRepo(final GitRepoModel gitRepo) {
+        this.gitRepo = gitRepo;
+    }
+
+    public ScanStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(final ScanStatus status) {
+        this.status = status;
+    }
+
+    public int getUnmergedCommitCount() {
+        return unmergedCommitCount;
+    }
+
+    public void setUnmergedCommitCount(final int unmergedCommitCount) {
+        this.unmergedCommitCount = unmergedCommitCount;
     }
 
     public LocalDateTime getCreatedAt() {

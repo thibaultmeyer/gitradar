@@ -28,4 +28,4 @@ flyway:
 
 
 gitradar:
-    working_directory: ''
+    git_data_directory: 'C:/Temp/gitradar-data'

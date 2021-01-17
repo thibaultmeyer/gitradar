@@ -14,23 +14,23 @@
             <div class="item">
 
                     <div class="ui grid">
-                        <div class="one wide column" style="max-width: 15px">
-                            <i class="exclamation check circle icon green"
-                               th:if="${repo.lastScanUnmergedCommit == 0 && repo.lastScanStatus != null && repo.lastScanStatus != 'ABORTED'}"></i>
-                            <i class="exclamation triangle icon orange"
-                               th:if="${repo.lastScanUnmergedCommit > 0 && repo.lastScanStatus != 'ABORTED'}"></i>
-                            <i class="exclamation check circle icon red"
-                               th:if="${repo.lastScanStatus == 'ABORTED'}"></i>
-                            <i class="sync circle icon disabled"
-                               th:if="${repo.lastScanStatus == 'IN_PROGRESS'}"></i>
-                            <i class="hourglass outline icon disabled"
-                               th:if="${repo.lastScanStatus == null}"></i>
-                        </div>
-                        <div class="eight wide column">
-                            <a class="header" th:text="${repo.name}" th:href="@{/repository/{gitRepoSlug}(gitRepoSlug=${repo.slug})}"></a>
+                        <div class="ten wide column">
+                            <span style="display: inline-block; width: 20px">
+                                <i class="exclamation check circle icon green"
+                                   th:if="${repo.lastScanUnmergedCommit == 0 && repo.lastScanStatus != null && repo.lastScanStatus != 'ABORTED'}"></i>
+                                <i class="exclamation triangle icon orange"
+                                   th:if="${repo.lastScanUnmergedCommit > 0 && repo.lastScanStatus != 'ABORTED'}"></i>
+                                <i class="exclamation check circle icon red"
+                                   th:if="${repo.lastScanStatus == 'ABORTED'}"></i>
+                                <i class="sync circle icon disabled"
+                                   th:if="${repo.lastScanStatus == 'IN_PROGRESS'}"></i>
+                                <i class="hourglass outline icon disabled"
+                                   th:if="${repo.lastScanStatus == null}"></i>
+                            </span>
+                            <a style="font-weight: bold" th:text="${repo.name}" th:href="@{/repository/{gitRepoSlug}(gitRepoSlug=${repo.slug})}"></a>
                         </div>
                         <div class="one wide column"></div>
-                        <div class="six wide column">
+                        <div class="five wide column">
                             <div class="description" style="text-align: right">
                                 <th:block th:switch="${repo.lastScanStatus}">
                                     <div th:case="'COMPLETE'">

@@ -9,6 +9,19 @@
     <h2 th:text="${repositoryName}"></h2>
     <br/>
 
+
+    <th:block th:each="unmergedCommit : ${lastScan.unmergedCommitList}">
+        <div class="ui relaxed divided list">
+            <div class="item">
+                <div class="content">
+                    <a class="header" th:text="${unmergedCommit.branchName}"></a>
+                    <div class="description" th:text="@{'[' + ${unmergedCommit.commitSha} + '] ' + ${unmergedCommit.commitSubject}}"></div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <br/>
+
 </div> <!-- End container -->
 
 </body>
